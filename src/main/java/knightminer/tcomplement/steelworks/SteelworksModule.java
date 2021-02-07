@@ -229,7 +229,7 @@ public class SteelworksModule extends PulseBase {
 		}
 
 		// steel
-		int amount = (int)(Material.VALUE_Ingot * Config.highOven.oreToIngotRatio);
+		int amount = (int)(Config.general.ingotValue * Config.highOven.oreToIngotRatio);
 		TCompRegistry.registerMix(
 				new FluidStack(TinkerFluids.iron, amount),
 				new FluidStack(TinkerFluids.steel, amount))
@@ -248,8 +248,8 @@ public class SteelworksModule extends PulseBase {
 
 		// pig iron
 		IMixRecipe mix = TCompRegistry.registerMix(
-				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot),
-				new FluidStack(TinkerFluids.pigIron, Material.VALUE_Ingot))
+				new FluidStack(TinkerFluids.iron, Config.general.ingotValue),
+				new FluidStack(TinkerFluids.pigIron, Config.general.ingotValue))
 																	// additives
 																	.addOxidizer(new ItemStack(Items.SUGAR), 60)
 																	.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
@@ -261,15 +261,15 @@ public class SteelworksModule extends PulseBase {
 
 		// knightslime
 		TCompRegistry.registerMix(
-				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot/2),
-				new FluidStack(TinkerFluids.knightslime, Material.VALUE_Ingot/2))
+				new FluidStack(TinkerFluids.iron, Config.general.ingotValue/2),
+				new FluidStack(TinkerFluids.knightslime, Config.general.ingotValue/2))
 								 // additives, no oxidizer for this recipe
 								 .addReducer("slimeballPurple", 75)
 								 .addPurifier("gravel", 80);
 
 		// dark chocolate
 		if(Config.general.chocolate) {
-			amount = (int)(Material.VALUE_Ingot * Config.highOven.oreToIngotRatio / 3);
+			amount = (int)(Config.general.ingotValue * Config.highOven.oreToIngotRatio / 3);
 			TCompRegistry.registerMix(new FluidStack(CommonsModule.chocolateLiquor, amount), new FluidStack(CommonsModule.darkChocolate, amount))
 									 .addOxidizer(new ItemStack(Items.SUGAR), 40)
 									 .addReducer(CommonsModule.cocoaButter.copy(), 60);
@@ -291,23 +291,23 @@ public class SteelworksModule extends PulseBase {
 	private void registerMeltingCasting() {
 		// bricks
 		TinkerRegistry.registerTableCasting(new CastingRecipe(CommonsModule.scorchedBrick.copy(),
-				RecipeMatch.of(Items.BRICK), new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial/4), 40, true, false));
+				RecipeMatch.of(Items.BRICK), new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)/4), 40, true, false));
 		// raw clay -> cobble
 		TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(scorchedBlock, 1, SearedType.COBBLE.getMeta()),
-				RecipeMatch.of(Blocks.CLAY), new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial), 80, true, false));
+				RecipeMatch.of(Blocks.CLAY), new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)), 80, true, false));
 		// terracotta -> stone
 		TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(scorchedBlock, 1, SearedType.STONE.getMeta()),
-				RecipeMatch.of(Blocks.HARDENED_CLAY), new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial), 100, true, false));
+				RecipeMatch.of(Blocks.HARDENED_CLAY), new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)), 100, true, false));
 		TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(scorchedBlock, 1, SearedType.STONE.getMeta()),
 				RecipeMatch.of(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE)),
-				new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial), 100, true, false));
+				new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)), 100, true, false));
 		// brick block
 		TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(scorchedBlock, 1, SearedType.BRICK_SMALL.getMeta()),
-				RecipeMatch.of(Blocks.BRICK_BLOCK), new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial), 100, true, false));
+				RecipeMatch.of(Blocks.BRICK_BLOCK), new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)), 100, true, false));
 		// brick slab
 		TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(scorchedSlab2, 1, BlockSearedSlab2.SearedType.BRICK_SMALL.getMeta()),
 				RecipeMatch.of(new ItemStack(Blocks.STONE_SLAB, 1, BlockStoneSlab.EnumType.BRICK.getMetadata())),
-				new FluidStack(TinkerFluids.searedStone, Material.VALUE_SearedMaterial/2), 60, true, false));
+				new FluidStack(TinkerFluids.searedStone, (Config.general.ingotValue / 2)/2), 60, true, false));
 
 		// turn cobble into stone
 		GameRegistry.addSmelting(new ItemStack(scorchedBlock, 1, SearedType.COBBLE.getMeta()),
@@ -329,11 +329,11 @@ public class SteelworksModule extends PulseBase {
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
 		ImmutableSet.Builder<Pair<String, Integer>> builder = ImmutableSet.builder();
-		builder.add(Pair.of("ore" + ore, (int) (Material.VALUE_Ingot * Config.highOven.oreToIngotRatio)));
-		builder.add(Pair.of("oreNether" + ore, (int) (2 * Material.VALUE_Ingot * Config.highOven.oreToIngotRatio)));
-		builder.add(Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.highOven.oreToIngotRatio)));
-		builder.add(Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.highOven.oreToIngotRatio)));
-		builder.add(Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.highOven.oreToIngotRatio)));
+		builder.add(Pair.of("ore" + ore, (int) (Config.general.ingotValue * Config.highOven.oreToIngotRatio)));
+		builder.add(Pair.of("oreNether" + ore, (int) (2 * Config.general.ingotValue * Config.highOven.oreToIngotRatio)));
+		builder.add(Pair.of("denseore" + ore, (int) (3 * Config.general.ingotValue * Config.highOven.oreToIngotRatio)));
+		builder.add(Pair.of("orePoor" + ore, (int) ((Config.general.ingotValue / 10) * 3 * Config.highOven.oreToIngotRatio)));
+		builder.add(Pair.of("oreNugget" + ore, (int) ((Config.general.ingotValue / 10) * Config.highOven.oreToIngotRatio)));
 
 		Set<Pair<String, Integer>> knownOres = builder.build();
 

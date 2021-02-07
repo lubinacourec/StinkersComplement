@@ -66,8 +66,8 @@ public class CeramicsPlugin extends PulseBase {
 		if(Config.general.bucketCast && isSmelteryLoaded()) {
 			ItemStack bucket = GameRegistry.makeItemStack(ModIds.Ceramics.bucket, 0, 1, null);
 			if(!bucket.isEmpty()) {
-				TinkerRegistry.registerTableCasting(bucket, CommonsModule.castBucket, TinkerFluids.clay, Material.VALUE_Ingot * 3);
-				TinkerRegistry.registerTableCasting(new CastingRecipe(bucket.copy(), RecipeMatch.of(CommonsModule.castBucketClay), TinkerFluids.clay, Material.VALUE_Ingot * 3, true, false));
+				TinkerRegistry.registerTableCasting(bucket, CommonsModule.castBucket, TinkerFluids.clay, Config.general.ingotValue * 3);
+				TinkerRegistry.registerTableCasting(new CastingRecipe(bucket.copy(), RecipeMatch.of(CommonsModule.castBucketClay), TinkerFluids.clay, Config.general.ingotValue * 3, true, false));
 			}
 		}
 	}

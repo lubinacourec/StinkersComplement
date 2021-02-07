@@ -3,6 +3,7 @@ package knightminer.tcomplement.plugin.jei.highoven.mix;
 import javax.annotation.Nonnull;
 
 import knightminer.tcomplement.TinkersComplement;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.plugin.jei.highoven.melting.HighOvenMeltingCategory;
 import mezz.jei.api.IGuiHelper;
@@ -89,7 +90,7 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 
 		// fluids
 		fluids.init(0, true, 12, 41, 16, 16, 1, false, null);
-		fluids.init(1, false, 120, 5, 35, 52, Material.VALUE_Block, false, scalaOutput);
+		fluids.init(1, false, 120, 5, 35, 52, Config.general.ingotValue * 9, false, scalaOutput);
 		fluids.set(ingredients);
 	}
 

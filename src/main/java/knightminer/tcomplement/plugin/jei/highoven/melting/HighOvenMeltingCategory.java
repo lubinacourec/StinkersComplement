@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 
 import knightminer.tcomplement.TinkersComplement;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.plugin.jei.highoven.mix.HighOvenMixCategory;
@@ -78,7 +79,7 @@ public class HighOvenMeltingCategory implements IRecipeCategory<HighOvenMeltingW
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
 		fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
 
-		fluids.init(0, false, 120, 5, 35, 52, Material.VALUE_Block, false, scala);
+		fluids.init(0, false, 120, 5, 35, 52, Config.general.ingotValue * 9, false, scala);
 		fluids.set(ingredients);
 	}
 

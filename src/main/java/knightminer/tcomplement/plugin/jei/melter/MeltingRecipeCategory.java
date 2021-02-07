@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.ImmutableList;
 
 import knightminer.tcomplement.TinkersComplement;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.library.Util;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -86,7 +87,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipeWrapp
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
 		fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
 
-		fluids.init(0, false, 121, 7, 32, 32, Material.VALUE_Block, false, scala);
+		fluids.init(0, false, 121, 7, 32, 32, Config.general.ingotValue * 9, false, scala);
 		fluids.set(ingredients);
 
 		fluids.init(1, true, 29, 7, 12, 32, 1000, false, null);

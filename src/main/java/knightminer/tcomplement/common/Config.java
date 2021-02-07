@@ -47,6 +47,11 @@ public class Config {
 		@Comment("Enables chocolate: made using a smeltery. Its a secret, so don't tell anyone.")
 		@LangKey("tcomplement.config.general.chocolate")
 		public boolean chocolate = true;
+
+		@RequiresMcRestart
+		@Comment("How much the different items are \"worth\", this value is used for both liquid conversion as well as part crafting.")
+		@LangKey("tcomplement.config.general.ingotvalue")
+		public int ingotValue = 100;
 	}
 
 	public static class Melter {

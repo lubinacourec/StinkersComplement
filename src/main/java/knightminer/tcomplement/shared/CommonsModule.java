@@ -98,8 +98,8 @@ public class CommonsModule extends PulseBase {
 
 			if(Config.general.bucketCast) {
 				stoneBucket = materials.addMeta(0, "stone_bucket");
-				castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
-				castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);
+				castBucket = cast.addMeta(0, "bucket", Config.general.ingotValue);
+				castBucketClay = castClay.addMeta(0, "bucket", Config.general.ingotValue);
 			}
 
 			if(Config.general.chocolate) {
@@ -150,14 +150,14 @@ public class CommonsModule extends PulseBase {
 		if(isSmelteryLoaded()) {
 			if(Config.general.bucketCast) {
 				// cast iron buckets, because it sounds cool and opens an option for bucket gating with Ceramics
-				TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
+				TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), castBucket, TinkerFluids.iron, Config.general.ingotValue * 3);
 				// add cast recipes for bucket cast
 				for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
 					TinkerRegistry.registerTableCasting(new CastingRecipe(castBucket, new RecipeMatch.Item(stoneBucket, 1), fs, true, true));
 				}
 
 				// use clay cast to make iron buckets, so you don't need gold
-				TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(castBucketClay), TinkerFluids.iron, Material.VALUE_Ingot * 3, true, false));
+				TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(castBucketClay), TinkerFluids.iron, Config.general.ingotValue * 3, true, false));
 				// add cast recipes for bucket cast
 				for(FluidStack fs : TinkerSmeltery.clayCreationFluids) {
 					TinkerRegistry.registerTableCasting(new CastingRecipe(castBucketClay, new RecipeMatch.Item(stoneBucket, 1), fs, true, true));
@@ -167,31 +167,31 @@ public class CommonsModule extends PulseBase {
 			// chocolate
 			if(Config.general.chocolate) {
 				// cast chocolate and melt it back
-				TinkerRegistry.registerTableCasting(new CastingRecipe(milkChocolateIngot.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), milkChocolate, Material.VALUE_Ingot, 60));
-				TinkerRegistry.registerTableCasting(new CastingRecipe(milkChocolateNugget.copy(), RecipeMatch.of(TinkerSmeltery.castNugget), milkChocolate, Material.VALUE_Nugget, 20));
-				TinkerRegistry.registerMelting(milkChocolateIngot, milkChocolate, Material.VALUE_Ingot);
-				TinkerRegistry.registerMelting(milkChocolateNugget, milkChocolate, Material.VALUE_Nugget);
+				TinkerRegistry.registerTableCasting(new CastingRecipe(milkChocolateIngot.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), milkChocolate, Config.general.ingotValue, 60));
+				TinkerRegistry.registerTableCasting(new CastingRecipe(milkChocolateNugget.copy(), RecipeMatch.of(TinkerSmeltery.castNugget), milkChocolate, (Config.general.ingotValue / 10), 20));
+				TinkerRegistry.registerMelting(milkChocolateIngot, milkChocolate, Config.general.ingotValue);
+				TinkerRegistry.registerMelting(milkChocolateNugget, milkChocolate, (Config.general.ingotValue / 10));
 				if(isSteelworksLoaded()) {
-					TinkerRegistry.registerTableCasting(new CastingRecipe(darkChocolateIngot.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), darkChocolate, Material.VALUE_Ingot, 80));
-					TinkerRegistry.registerTableCasting(new CastingRecipe(darkChocolateNugget.copy(), RecipeMatch.of(TinkerSmeltery.castNugget), darkChocolate, Material.VALUE_Nugget, 30));
-					TinkerRegistry.registerMelting(darkChocolateIngot, darkChocolate, Material.VALUE_Ingot);
-					TinkerRegistry.registerMelting(darkChocolateNugget, darkChocolate, Material.VALUE_Nugget);
+					TinkerRegistry.registerTableCasting(new CastingRecipe(darkChocolateIngot.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), darkChocolate, Config.general.ingotValue, 80));
+					TinkerRegistry.registerTableCasting(new CastingRecipe(darkChocolateNugget.copy(), RecipeMatch.of(TinkerSmeltery.castNugget), darkChocolate, (Config.general.ingotValue / 10), 30));
+					TinkerRegistry.registerMelting(darkChocolateIngot, darkChocolate, Config.general.ingotValue);
+					TinkerRegistry.registerMelting(darkChocolateNugget, darkChocolate, (Config.general.ingotValue / 10));
 				}
 				// cocoa butter for making dark chocolate
-				TinkerRegistry.registerTableCasting(new CastingRecipe(cocoaButter.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), chocolateLiquor, Material.VALUE_Ingot, 80));
+				TinkerRegistry.registerTableCasting(new CastingRecipe(cocoaButter.copy(), RecipeMatch.of(TinkerSmeltery.castIngot), chocolateLiquor, Config.general.ingotValue, 80));
 
 				// make chocolate liquor
 				ItemStack cocoaBeans = new ItemStack(Items.DYE, 1, EnumDyeColor.BROWN.getDyeDamage());
-				TinkerRegistry.registerMelting(cocoaBeans, chocolateLiquor, Material.VALUE_Ore() / 3);
+				TinkerRegistry.registerMelting(cocoaBeans, chocolateLiquor, (Config.general.ingotValue * 2) / 3);
 				if(isMelterLoaded()) {
-					TCompRegistry.registerMelterOverride(new MeltingRecipe(RecipeMatch.of(cocoaBeans, (int)(Material.VALUE_Ingot * Config.melter.oreToIngotRatio / 3)), chocolateLiquor));
+					TCompRegistry.registerMelterOverride(new MeltingRecipe(RecipeMatch.of(cocoaBeans, (int)(Config.general.ingotValue * Config.melter.oreToIngotRatio / 3)), chocolateLiquor));
 				}
 				if(isMelterLoaded()) {
-					TCompRegistry.registerHighOvenOverride(new MeltingRecipe(RecipeMatch.of(cocoaBeans, (int)(Material.VALUE_Ingot * Config.highOven.oreToIngotRatio / 3)), chocolateLiquor));
+					TCompRegistry.registerHighOvenOverride(new MeltingRecipe(RecipeMatch.of(cocoaBeans, (int)(Config.general.ingotValue * Config.highOven.oreToIngotRatio / 3)), chocolateLiquor));
 				}
 
 				// milk chocolate
-				TinkerRegistry.registerAlloy(new FluidStack(milkChocolate, Material.VALUE_Nugget), new FluidStack(chocolateLiquor, Material.VALUE_Nugget / 2), new FluidStack(TinkerFluids.milk, 20));
+				TinkerRegistry.registerAlloy(new FluidStack(milkChocolate, (Config.general.ingotValue / 10)), new FluidStack(chocolateLiquor, (Config.general.ingotValue / 10) / 2), new FluidStack(TinkerFluids.milk, 20));
 
 				// dark chocolate recipe handled in steelworks module
 			}

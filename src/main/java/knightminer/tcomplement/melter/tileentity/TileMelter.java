@@ -47,7 +47,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 	// liquid stored inside
 	private FluidTankAnimated tank;
 
-	protected static final int CAPACITY = Material.VALUE_Ingot * 16;
+	protected static final int CAPACITY = Config.general.ingotValue * 16;
 
 	public TileMelter() {
 		super("gui.tcomplement.melter.name", 3, 1);

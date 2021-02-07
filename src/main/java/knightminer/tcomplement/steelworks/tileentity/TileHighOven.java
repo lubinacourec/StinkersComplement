@@ -1,5 +1,6 @@
 package knightminer.tcomplement.steelworks.tileentity;
 
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
 import knightminer.tcomplement.library.steelworks.IHeatRecipe;
@@ -61,7 +62,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 	/** Maximum number of item slots in the melter */
 	private static final int MAX_SLOTS = 7;
 
-	private static final int CAPACITY_PER_LAYER = Material.VALUE_Ingot * 12;
+	private static final int CAPACITY_PER_LAYER = Config.general.ingotValue * 12;
 
 	protected HighOvenTank liquids;
 	protected InventoryHighOven additives;

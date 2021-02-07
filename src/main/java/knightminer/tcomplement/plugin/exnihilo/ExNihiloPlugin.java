@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.plugin.exnihilo.items.ItemSledgeHammer;
@@ -42,7 +43,7 @@ public class ExNihiloPlugin extends PulseBase {
 	public void registerItems(Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 		if(isToolsLoaded()) {
-			sledgeHead = registerItem(r, new ToolPart(Material.VALUE_Ingot * 2), "sledge_head");
+			sledgeHead = registerItem(r, new ToolPart(Config.general.ingotValue * 2), "sledge_head");
 			sledgeHead.setCreativeTab(TCompRegistry.tabTools);
 			sledgeHammer = registerItem(r, new ItemSledgeHammer(), "sledge_hammer");
 		}

@@ -129,11 +129,11 @@ public class MelterModule extends PulseBase {
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
 		ImmutableSet.Builder<Pair<String, Integer>> builder = ImmutableSet.builder();
-		builder.add(Pair.of("ore" + ore, (int) (Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
-		builder.add(Pair.of("oreNether" + ore, (int) (2 * Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
-		builder.add(Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
-		builder.add(Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.melter.oreToIngotRatio)));
-		builder.add(Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("ore" + ore, (int) (Config.general.ingotValue * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("oreNether" + ore, (int) (2 * Config.general.ingotValue * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("denseore" + ore, (int) (3 * Config.general.ingotValue * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("orePoor" + ore, (int) ((Config.general.ingotValue / 10) * 3 * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("oreNugget" + ore, (int) ((Config.general.ingotValue / 10) * Config.melter.oreToIngotRatio)));
 
 		Set<Pair<String, Integer>> knownOres = builder.build();
 

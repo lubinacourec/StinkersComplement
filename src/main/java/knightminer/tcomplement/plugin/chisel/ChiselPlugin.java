@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.plugin.chisel.items.ItemChisel;
@@ -58,7 +59,7 @@ public class ChiselPlugin extends PulseBase {
 		IForgeRegistry<Item> r = event.getRegistry();
 
 		if(isToolsLoaded()) {
-			chiselHead = registerItem(r, new ToolPart(Material.VALUE_Ingot), "chisel_head");
+			chiselHead = registerItem(r, new ToolPart(Config.general.ingotValue), "chisel_head");
 			chiselHead.setCreativeTab(TCompRegistry.tabTools);
 			chisel = registerItem(r, new ItemChisel(), "chisel");
 			modHitech = new ModHitech();
