@@ -1,11 +1,11 @@
 [
 	{
 		"modid": "tcomplement",
-		"name": "Tinkers' Complement",
-		"description": "Addon for Tinkers Construct adding various features to complement those from Tinkers",
+		"name": "Stinkers' Complement",
+		"description": "Addon for Stinkers' Construct adding various features to complement those from Tinkers",
 		"version": "${version}",
 		"mcversion": "${mcversion}",
-		"url": "https://minecraft.curseforge.com/projects/tinkers-complement",
+		"url": "https://github.com/lubinacourec/StinkersComplement",
 		"updateUrl": "",
 		"authorList": ["KnightMiner"],
 		"credits": "Design of the steelworks module and some high oven code based off Tinkers' Steelworks by Toops and ephys",

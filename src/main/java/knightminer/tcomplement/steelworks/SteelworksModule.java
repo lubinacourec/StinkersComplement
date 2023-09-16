@@ -246,19 +246,6 @@ public class SteelworksModule extends PulseBase {
 								 // purifiers
 								 .addPurifier("sand", 100);
 
-		// pig iron
-		IMixRecipe mix = TCompRegistry.registerMix(
-				new FluidStack(TinkerFluids.iron, Config.general.ingotValue),
-				new FluidStack(TinkerFluids.pigIron, Config.general.ingotValue))
-																	// additives
-																	.addOxidizer(new ItemStack(Items.SUGAR), 60)
-																	.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
-																	.addPurifier(new ItemStack(Items.PORKCHOP), 80);
-		ItemStack bacon = GameRegistry.makeItemStack(ModIds.TConstruct.edibles, ModIds.TConstruct.baconMeta, 1, null);
-		if(!bacon.isEmpty()) {
-			mix.addPurifier(bacon, 70);
-		}
-
 		// knightslime
 		TCompRegistry.registerMix(
 				new FluidStack(TinkerFluids.iron, Config.general.ingotValue/2),
